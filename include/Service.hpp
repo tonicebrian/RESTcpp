@@ -3,7 +3,10 @@
 
 namespace restcpp {
     class Service {
+        int port;
+
         public:
+            Service(int port);
             bool run();
     };
 }
