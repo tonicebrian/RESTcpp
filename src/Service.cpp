@@ -10,7 +10,16 @@ using namespace pion::net;
 /**
  * Constructor
  */
-Service::Service(int port=8080) : port(port) {}
+Service::Service(HTTPServer& _server) 
+    : server(_server) {}
+
+/**
+ * Adds a new path to be listened to
+ */
+Service&
+Service::path(const std::string& path){
+    return *this;
+}
 
 /**
  * Run the server
@@ -18,11 +27,8 @@ Service::Service(int port=8080) : port(port) {}
 bool
 Service::run(){
 
-    boost::asio::ip::tcp::endpoint cfg_endpoint(boost::asio::ip::tcp::v4(), port);
-    WebServer web_server(cfg_endpoint);
-
     try {
-        web_server.start();
+        server.start();
         main_shutdown_manager.wait();
     } catch(std::exception& e){
         std::cerr << e.what() << std::endl;

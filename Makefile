@@ -12,3 +12,7 @@ dist/Release/Makefile: CMakeLists.txt
 
 clean:
 	rm -rf dist
+
+test: debug
+	dist/Debug/UnitTester
+	

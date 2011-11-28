@@ -14,18 +14,27 @@ include_directories("${PROJECT_SOURCE_DIR}/include")
 add_definitions("-std=c++0x")
 
 # Main library
-find_package(Boost COMPONENTS signals REQUIRED)
+find_package(Boost COMPONENTS system thread REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(Log4CPP REQUIRED)
 
 set(SOURCES src/Service.cpp
             src/ShutdownManager.hpp)
 
 add_library(restcpp ${SOURCES})
 
+target_link_libraries(restcpp pion-net
+                              pion-common
+                              ${Boost_SYSTEM_LIBRARY}
+                              ${Boost_THREAD_LIBRARY}
+                              ${LOG4CPP_LIBRARIES}
+                              )
+
 # Test driver
 find_package(CppUnit REQUIRED)
 
-set(TEST_SOURCES test/main.cpp)
+set(TEST_SOURCES test/main.cpp
+                 test/ServiceTest.cpp)
 
 add_executable(UnitTester ${TEST_SOURCES})
 
