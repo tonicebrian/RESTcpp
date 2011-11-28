@@ -8,10 +8,17 @@
 
 #include <cstdlib>
 
+#include <gmock/gmock.h>
+
 int main(int argc, char* argv[]) {
     // Define test variables
     using namespace CppUnit;
     using namespace std;
+
+    // Setup GMock
+    ::testing::GTEST_FLAG(throw_on_failure) = true;
+    ::testing::InitGoogleMock(&argc, argv);
+ 
 
     TestResult controller;
     TestResultCollector result;

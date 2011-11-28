@@ -10,22 +10,38 @@ using namespace pion::net;
 /**
  * Constructor
  */
-Service::Service(HTTPServer& _server) 
-    : server(_server) {}
+template<class Server>
+Service<Server>::Service(Server& _server) 
+    : server(_server) {
+    // Ensure that listens in a valid port
+    server.setPort(DEFAULT_PORT);
+}
+
+/**
+ * Set the port of the server
+ */
+template<class Server>
+Service<Server>&
+Service<Server>::port(int port){
+    server.setPort(port);
+    return *this;
+}
 
 /**
  * Adds a new path to be listened to
  */
-Service&
-Service::path(const std::string& path){
+template<class Server>
+Service<Server>&
+Service<Server>::path(const std::string& path){
     return *this;
 }
 
 /**
  * Run the server
  */
+template<class Server>
 bool
-Service::run(){
+Service<Server>::run(){
 
     try {
         server.start();

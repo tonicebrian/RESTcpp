@@ -1,5 +1,13 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "Service.hpp"
+#include "gmock/gmock.h"
+
+using namespace restcpp;
+
+class HTTPServerMock {
+    public:
+        MOCK_METHOD1(setPort, void(int port));
+};
 
 class ServiceTest : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE(ServiceTest);
@@ -15,12 +23,16 @@ class ServiceTest : public CppUnit::TestFixture {
     }
 
     void testService(){
-        HTTPServer server;
-        restcpp::Service service(server);
-        service
-            .path("root");
+        // Set the mock object
+        HTTPServerMock server;
+        EXPECT_CALL(server, setPort(8080))
+                  .Times(1);
 
-        CPPUNIT_ASSERT_EQUAL(1,0);
+        // Perform the SUT
+        Service<HTTPServerMock> service(server);
+        service
+            .port(8080)
+            .path("root");
     }
 };
 

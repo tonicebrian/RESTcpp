@@ -9,7 +9,9 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 set(BUILD_SHARED_LIBS ON)
 
-include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories("${PROJECT_SOURCE_DIR}/include"
+                     ${GOOGLEMOCK_INCLUDE_DIR}
+                    )
 
 add_definitions("-std=c++0x")
 
@@ -17,6 +19,9 @@ add_definitions("-std=c++0x")
 find_package(Boost COMPONENTS system thread REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Log4CPP REQUIRED)
+find_package(GoogleMock REQUIRED)
+find_package(GoogleTest REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 set(SOURCES src/Service.cpp
             src/ShutdownManager.hpp)
@@ -28,6 +33,8 @@ target_link_libraries(restcpp pion-net
                               ${Boost_SYSTEM_LIBRARY}
                               ${Boost_THREAD_LIBRARY}
                               ${LOG4CPP_LIBRARIES}
+                              ${OPENSSL_LIBRARIES}
+                              pthread
                               )
 
 # Test driver
@@ -39,4 +46,7 @@ set(TEST_SOURCES test/main.cpp
 add_executable(UnitTester ${TEST_SOURCES})
 
 target_link_libraries(UnitTester restcpp
-                                 cppunit)
+                                 cppunit
+                                 ${GOOGLEMOCK_LIBRARY}
+                                 ${GTEST_LIBRARIES}
+                                 )

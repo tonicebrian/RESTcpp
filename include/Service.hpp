@@ -12,18 +12,24 @@ namespace restcpp {
     /**
      * Class implementing the BuilderCommand
      */
+    template<class Server> // This is required for mocking the HTTPServer object
     class Service {
         private:
-            HTTPServer& server;
+            Server& server;
 
         public:
-            Service(HTTPServer& server);
+            Service(Server& server);
             bool run();
 
             /**
              * Define a new path
              */
             Service& path(const std::string& path);
+
+            /**
+             * Define the port for listening to
+             */
+            Service& port(int port);
     };
 }
 
