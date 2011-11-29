@@ -22,10 +22,11 @@ Service::port(int port){
 }
 
 /**
- * Adds a new path to be listened to
+ * Add a resource
  */
 Service&
 Service::path(const std::string& path){
+    server.addResource(path);
     return *this;
 }
 

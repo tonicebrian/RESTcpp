@@ -14,6 +14,7 @@ namespace restcpp {
 
         public:
             virtual void setPort(int port);
+            virtual void addResource(const std::string& path);
             virtual void start();
 
             virtual ~Server(){};

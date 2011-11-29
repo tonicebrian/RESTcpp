@@ -18,7 +18,6 @@ int main(int argc, char* argv[]) {
     // Setup GMock
     ::testing::GTEST_FLAG(throw_on_failure) = true;
     ::testing::InitGoogleMock(&argc, argv);
- 
 
     TestResult controller;
     TestResultCollector result;

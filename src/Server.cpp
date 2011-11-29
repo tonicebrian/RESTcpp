@@ -12,3 +12,10 @@ void
 Server::start(){
     server.start();
 }
+
+void 
+Server::addResource(const std::string& path){
+    server.addResource(path,NULL);
+}
+
+

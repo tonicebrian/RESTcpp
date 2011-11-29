@@ -5,10 +5,13 @@
 
 using namespace restcpp;
 
-class HTTPServerMock : virtual public Server {
+class HTTPServerMock : public Server {
     public:
         MOCK_METHOD1(setPort, void(int port));
+        MOCK_METHOD1(addResource, void(const std::string& resource));
         MOCK_METHOD0(start, void());
+
+        virtual ~HTTPServerMock(){};
 };
 
 class ServiceTest : public CppUnit::TestFixture {
@@ -29,6 +32,9 @@ class ServiceTest : public CppUnit::TestFixture {
         HTTPServerMock server;
         EXPECT_CALL(server, setPort(8080))
                   .Times(1);
+        EXPECT_CALL(server, addResource("root"))
+                  .Times(1);
+
 
         // Perform the SUT
         Service service(server);
