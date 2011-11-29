@@ -10,6 +10,7 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(BUILD_SHARED_LIBS ON)
 
 include_directories("${PROJECT_SOURCE_DIR}/include"
+                    "${PROJECT_SOURCE_DIR}/src"
                      ${GOOGLEMOCK_INCLUDE_DIR}
                     )
 

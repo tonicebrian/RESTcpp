@@ -13,8 +13,6 @@ using namespace pion::net;
 template<class Server>
 Service<Server>::Service(Server& _server) 
     : server(_server) {
-    // Ensure that listens in a valid port
-    server.setPort(DEFAULT_PORT);
 }
 
 /**

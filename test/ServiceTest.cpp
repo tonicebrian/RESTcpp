@@ -1,5 +1,6 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "Service.hpp"
+#include "Service.cpp"
 #include "gmock/gmock.h"
 
 using namespace restcpp;
@@ -7,6 +8,7 @@ using namespace restcpp;
 class HTTPServerMock {
     public:
         MOCK_METHOD1(setPort, void(int port));
+        MOCK_METHOD0(start, void());
 };
 
 class ServiceTest : public CppUnit::TestFixture {
