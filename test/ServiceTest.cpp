@@ -1,11 +1,11 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "Service.hpp"
-#include "Service.cpp"
+#include <Server.hpp>
 #include "gmock/gmock.h"
 
 using namespace restcpp;
 
-class HTTPServerMock {
+class HTTPServerMock : virtual public Server {
     public:
         MOCK_METHOD1(setPort, void(int port));
         MOCK_METHOD0(start, void());
@@ -31,7 +31,7 @@ class ServiceTest : public CppUnit::TestFixture {
                   .Times(1);
 
         // Perform the SUT
-        Service<HTTPServerMock> service(server);
+        Service service(server);
         service
             .port(8080)
             .path("root");

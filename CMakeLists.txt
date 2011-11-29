@@ -25,7 +25,9 @@ find_package(GoogleTest REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 set(SOURCES src/Service.cpp
-            src/ShutdownManager.hpp)
+            src/ShutdownManager.hpp
+            src/Server.cpp
+            )
 
 add_library(restcpp ${SOURCES})
 

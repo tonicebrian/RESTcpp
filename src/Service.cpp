@@ -1,26 +1,22 @@
 #include "Service.hpp"
 #include <boost/asio.hpp>
-#include <pion/net/WebServer.hpp>
 #include "ShutdownManager.hpp"
 
 
 using namespace restcpp;
-using namespace pion::net;
 
 /**
  * Constructor
  */
-template<class Server>
-Service<Server>::Service(Server& _server) 
+Service::Service(Server& _server) 
     : server(_server) {
 }
 
 /**
  * Set the port of the server
  */
-template<class Server>
-Service<Server>&
-Service<Server>::port(int port){
+Service&
+Service::port(int port){
     server.setPort(port);
     return *this;
 }
@@ -28,18 +24,16 @@ Service<Server>::port(int port){
 /**
  * Adds a new path to be listened to
  */
-template<class Server>
-Service<Server>&
-Service<Server>::path(const std::string& path){
+Service&
+Service::path(const std::string& path){
     return *this;
 }
 
 /**
  * Run the server
  */
-template<class Server>
 bool
-Service<Server>::run(){
+Service::run(){
 
     try {
         server.start();

@@ -2,9 +2,7 @@
 #define _REST_SERVICE_HPP_
 
 #include <string>
-#include <pion/net/HTTPServer.hpp>
-
-using namespace pion::net;
+#include <Server.hpp>
 
 namespace restcpp {
     static const int DEFAULT_PORT = 8080;
@@ -12,7 +10,6 @@ namespace restcpp {
     /**
      * Class implementing the BuilderCommand
      */
-    template<class Server> // This is required for mocking the HTTPServer object
     class Service {
         private:
             Server& server;
